@@ -3,7 +3,7 @@ export default /* glsl */`
 // to pick one. mediump is a good default. It means "medium precision"
 precision mediump float;
 
-uniform vec4 u_color;
+// uniform vec4 u_color;
 
 varying vec4 v_color;
 

@@ -1,4 +1,4 @@
-export function createProgramFromShaders(gl, vertexShaderSource, fragmentShaderSource) {
+export function createProgramFromShaders (gl: WebGLRenderingContext, vertexShaderSource: string, fragmentShaderSource: string) {
     const vs = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
     const fs = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
     if (vs && fs) {
@@ -6,7 +6,8 @@ export function createProgramFromShaders(gl, vertexShaderSource, fragmentShaderS
     }
     return null;
 }
-function createShader(gl, type, shaderSource) {
+
+function createShader (gl: WebGLRenderingContext, type: GLenum, shaderSource: string) {
     const shader = gl.createShader(type);
     if (shader) {
         gl.shaderSource(shader, shaderSource);
@@ -20,7 +21,8 @@ function createShader(gl, type, shaderSource) {
     }
     return null;
 }
-function createProgram(gl, vertexShader, fragmentShader) {
+
+function createProgram (gl: WebGLRenderingContext, vertexShader: WebGLShader, fragmentShader: WebGLShader) {
     const program = gl.createProgram();
     if (program) {
         gl.attachShader(program, vertexShader);
@@ -35,4 +37,3 @@ function createProgram(gl, vertexShader, fragmentShader) {
     }
     return null;
 }
-//# sourceMappingURL=Utils.js.map
