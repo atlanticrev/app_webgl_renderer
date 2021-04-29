@@ -6,11 +6,6 @@ class SceneObject {
         this._gl = gl;
         this._shaderProgram = createProgramFromShaders(this._gl, options.shaders.vertexShader, options.shaders.fragmentShader);
         this._attributes = options.attributes;
-        this._globalUniforms = {
-            u_resolution: {
-                location: null
-            }
-        };
         this._uniforms = options.uniforms;
         this._buffers = options.buffers;
         this.properties = {
@@ -34,9 +29,6 @@ class SceneObject {
             this._attributes[attribute].location = this._gl.getAttribLocation(this._shaderProgram, attribute);
         }
         // Uniforms
-        for (let uniform of Object.keys(this._globalUniforms)) {
-            this._globalUniforms[uniform].location = this._gl.getUniformLocation(this._shaderProgram, uniform);
-        }
         for (let uniform of Object.keys(this._uniforms)) {
             this._uniforms[uniform].location = this._gl.getUniformLocation(this._shaderProgram, uniform);
         }
@@ -55,7 +47,6 @@ class SceneObject {
     }
     // Every render
     setUniforms() {
-        this._gl.uniform2fv(this._globalUniforms['u_resolution'].location, [this._gl.canvas.width, this._gl.canvas.height]);
         this._gl.uniformMatrix4fv(this._uniforms['u_position'].location, false, this.calcSRTMatrix());
     }
     // Every render
@@ -75,11 +66,7 @@ class SceneObject {
     calcAnimation() { }
     // Every render
     calcSRTMatrix() {
-        return Mat4.getIdentMat()
-            .multiplyMatrix(Mat4.getScaleMat(this.properties.scale[0], this.properties.scale[1], this.properties.scale[2]))
-            .multiplyMatrix(Mat4.getRotMatZ(this.properties.rotation))
-            .multiplyMatrix(Mat4.getTransMat(this.properties.translation[0], this.properties.translation[1], this.properties.translation[2]))
-            .toTypedArray();
+        return Mat4.getIdentMat().toTypedArray();
     }
     // Every input change
     setPosition(x, y) {

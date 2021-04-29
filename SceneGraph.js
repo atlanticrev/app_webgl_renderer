@@ -6,9 +6,9 @@ const sceneGraph = [
     {
         type: Square,
         properties: {
+            translation: [300, 200, 0],
             scale: [1, 1],
             rotation: 45,
-            translation: [300, 200, 0]
         },
         shaders: {
             vertexShader: vertexShader,
@@ -43,9 +43,9 @@ const sceneGraph = [
     {
         type: FLetter,
         properties: {
+            translation: [800, 500],
             scale: [1.25, 1.25],
             rotation: 0,
-            translation: [800, 500]
         },
         shaders: {
             vertexShader: vertexShader,

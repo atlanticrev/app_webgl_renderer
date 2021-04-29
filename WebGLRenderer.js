@@ -8,7 +8,7 @@ class WebGLRenderer extends EventTarget {
         this._scene = sceneGraph.map(object => new object.type(this._gl, object));
         this._animationFrame = -1;
         // @todo Move to "SceneManager"
-        this.activeElement = this._scene[1];
+        this.activeElement = this._scene[0];
         this._renderIteration = this._renderIteration.bind(this);
         this.onPositionChange = this.onPositionChange.bind(this);
         this.onRotationChange = this.onRotationChange.bind(this);
