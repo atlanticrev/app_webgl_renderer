@@ -291,6 +291,35 @@ export class Mat4 {
         );
     }
 
+    // Scale + Translation
+    static getOrthoMat (left: number, top: number, right: number, bottom: number, near: number, far: number) {
+        return new Mat4(
+            2 / (right - left), 0, 0, 0,
+            0, 2 / (top - bottom), 0, 0,
+            0, 0, -2 / (far - near), 0,
+            -(right + left) / (right - left), -(top + bottom) / (top - bottom), -(far + near) / (far - near), 1
+        );
+    }
+
+    static getWFactorMat (perspectiveFactor: number) {
+        return new Mat4(
+            1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, perspectiveFactor,
+            0, 0, 0, 1,
+        );
+    }
+
+    static getPerspMat (FOVRad: number, aspect: number, near: number, far: number) {
+        const f = Math.tan(Math.PI / 2 - FOVRad / 2);
+        return new Mat4(
+            f / aspect, 0, 0, 0,
+            0, f, 0, 0,
+            0, 0, (far + near) / (near - far), 2 * far * near / (near - far),
+            0, 0, -1, 0
+        );
+    }
+
     static getIdentMat () {
         return new Mat4(
             1, 0, 0, 0,

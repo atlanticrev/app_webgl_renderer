@@ -30,7 +30,9 @@ class WebGLRenderer extends EventTarget {
         // (gl.canvas.height <-> 0) for y.
         this._gl.viewport(0, 0, this._canvas.width, this._canvas.height);
         this._gl.clearColor(0, 0, 0, 0);
-        this._gl.clear(this._gl.COLOR_BUFFER_BIT);
+        this._gl.clear(this._gl.COLOR_BUFFER_BIT | this._gl.DEPTH_BUFFER_BIT);
+        this._gl.enable(this._gl.CULL_FACE);
+        this._gl.enable(this._gl.DEPTH_TEST);
     }
 
     startRenderLoop () {
@@ -55,14 +57,14 @@ class WebGLRenderer extends EventTarget {
 
     // @todo Move to "SceneManager"
     onPositionChange (e: CustomEvent) {
-        const { x, y } = e.detail;
-        this.activeElement.setPosition(x, y);
+        const { x, y, z } = e.detail;
+        this.activeElement.setPosition(x, y, z);
     }
 
     // @todo Move to "SceneManager"
     onRotationChange (e: CustomEvent) {
-        const { angle } = e.detail;
-        this.activeElement.setRotation(angle);
+        const { angleX, angleY, angleZ } = e.detail;
+        this.activeElement.setRotation(angleX, angleY, angleZ);
     }
 
     // @todo Move to "SceneManager"

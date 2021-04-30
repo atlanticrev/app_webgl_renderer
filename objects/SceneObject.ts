@@ -22,7 +22,11 @@ class SceneObject {
                 options.properties.scale[1] || 1,
                 options.properties.scale[2] || 1,
             ],
-            rotation: options.properties.rotation || 0,
+            rotation: [
+                options.properties.rotation[0] || 0,
+                options.properties.rotation[1] || 0,
+                options.properties.rotation[2] || 0,
+            ],
             translation: [
                 options.properties.translation[0] || 0,
                 options.properties.translation[1] || 0,
@@ -62,18 +66,7 @@ class SceneObject {
     }
 
     // Every render
-    setBuffers () {
-        this._buffers['position_buffer'].location.bindWithAttribute(
-            this._attributes['a_position'].location,
-            {
-                size: 2,
-                type: this._gl.FLOAT,
-                normalized: false,
-                stride: 0,
-                offset: 0
-            }
-        );
-    }
+    setBuffers () {}
 
     // Every render
     drawCall () {
@@ -88,17 +81,25 @@ class SceneObject {
     }
 
     // Every input change
-    setPosition (x?: string, y?: string) {
+    setPosition (x: string, y: string, z: string) {
         if (x) {
             this.properties.translation[0] = x;
         } else if (y) {
             this.properties.translation[1] = y;
+        } else if (z) {
+            this.properties.translation[2] = z;
         }
     }
 
     // Every input change
-    setRotation (angle: string) {
-        this.properties.rotation = angle;
+    setRotation (angleX: string, angleY: string, angleZ: string) {
+        if (angleX) {
+            this.properties.rotation[0] = angleX;
+        } else if (angleY) {
+            this.properties.rotation[1] = angleY;
+        } else if (angleZ) {
+            this.properties.rotation[2] = angleZ;
+        }
     }
 
     // Every input change

@@ -14,7 +14,11 @@ class SceneObject {
                 options.properties.scale[1] || 1,
                 options.properties.scale[2] || 1,
             ],
-            rotation: options.properties.rotation || 0,
+            rotation: [
+                options.properties.rotation[0] || 0,
+                options.properties.rotation[1] || 0,
+                options.properties.rotation[2] || 0,
+            ],
             translation: [
                 options.properties.translation[0] || 0,
                 options.properties.translation[1] || 0,
@@ -50,15 +54,7 @@ class SceneObject {
         this._gl.uniformMatrix4fv(this._uniforms['u_position'].location, false, this.calcSRTMatrix());
     }
     // Every render
-    setBuffers() {
-        this._buffers['position_buffer'].location.bindWithAttribute(this._attributes['a_position'].location, {
-            size: 2,
-            type: this._gl.FLOAT,
-            normalized: false,
-            stride: 0,
-            offset: 0
-        });
-    }
+    setBuffers() { }
     // Every render
     drawCall() {
         this._gl.drawArrays(this._gl.TRIANGLES, 0, this._buffers['position_buffer'].location.getLength());
@@ -69,17 +65,28 @@ class SceneObject {
         return Mat4.getIdentMat().toTypedArray();
     }
     // Every input change
-    setPosition(x, y) {
+    setPosition(x, y, z) {
         if (x) {
             this.properties.translation[0] = x;
         }
         else if (y) {
             this.properties.translation[1] = y;
         }
+        else if (z) {
+            this.properties.translation[2] = z;
+        }
     }
     // Every input change
-    setRotation(angle) {
-        this.properties.rotation = angle;
+    setRotation(angleX, angleY, angleZ) {
+        if (angleX) {
+            this.properties.rotation[0] = angleX;
+        }
+        else if (angleY) {
+            this.properties.rotation[1] = angleY;
+        }
+        else if (angleZ) {
+            this.properties.rotation[2] = angleZ;
+        }
     }
     // Every input change
     setScale(scalar) {
