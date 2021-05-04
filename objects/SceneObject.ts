@@ -3,19 +3,14 @@ import { Buffer } from "../WebGLBuffer.js";
 import { Mat4 } from "../Math.js";
 
 class SceneObject {
+    properties: {[name: string]: any};
     protected readonly _gl: WebGLRenderingContext;
     protected readonly _shaderProgram: WebGLProgram;
     protected readonly _attributes: {[attribute: string]: any};
     protected readonly _uniforms: {[uniform: string]: any};
     protected readonly _buffers: {[buffer: string]: any};
-    properties: {[name: string]: any};
 
     constructor (gl: WebGLRenderingContext, options: any) {
-        this._gl = gl;
-        this._shaderProgram = createProgramFromShaders(this._gl, options.shaders.vertexShader, options.shaders.fragmentShader) as WebGLProgram;
-        this._attributes = options.attributes;
-        this._uniforms = options.uniforms;
-        this._buffers = options.buffers;
         this.properties = {
             scale: [
                 options.properties.scale[0] || 1,
@@ -33,6 +28,11 @@ class SceneObject {
                 options.properties.translation[2] || 0
             ]
         };
+        this._gl = gl;
+        this._shaderProgram = createProgramFromShaders(this._gl, options.shaders.vertexShader, options.shaders.fragmentShader) as WebGLProgram;
+        this._attributes = options.attributes;
+        this._uniforms = options.uniforms;
+        this._buffers = options.buffers;
         this.init();
     }
 
@@ -70,7 +70,7 @@ class SceneObject {
 
     // Every render
     drawCall () {
-        this._gl.drawArrays(this._gl.TRIANGLES, 0, this._buffers['position_buffer'].location.getLength());
+        this._gl.drawArrays(this._gl.TRIANGLES, 0, this._buffers['position_buffer'].location.getLength() / 3);
     }
 
     calcAnimation () {}

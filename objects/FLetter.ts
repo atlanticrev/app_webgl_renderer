@@ -1,5 +1,5 @@
 import SceneObject from "./SceneObject.js";
-import {Mat4} from "../Math.js";
+import { Mat4 } from "../Math.js";
 
 class FLetter extends SceneObject {
     constructor(gl: WebGLRenderingContext, options: any) {
@@ -78,10 +78,10 @@ class FLetter extends SceneObject {
     }
 
     calcAnimation () {
-        const step = 0.25;
-        this.properties.rotation[0] += step / 2;
+        const step = 0.5;
+        this.properties.rotation[0] += step / 5;
         this.properties.rotation[1] += step;
-        this.properties.rotation[2] += step / 4;
+        this.properties.rotation[2] += step / 5;
     }
 }
 

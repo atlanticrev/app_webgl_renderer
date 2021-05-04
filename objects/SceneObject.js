@@ -3,11 +3,6 @@ import { Buffer } from "../WebGLBuffer.js";
 import { Mat4 } from "../Math.js";
 class SceneObject {
     constructor(gl, options) {
-        this._gl = gl;
-        this._shaderProgram = createProgramFromShaders(this._gl, options.shaders.vertexShader, options.shaders.fragmentShader);
-        this._attributes = options.attributes;
-        this._uniforms = options.uniforms;
-        this._buffers = options.buffers;
         this.properties = {
             scale: [
                 options.properties.scale[0] || 1,
@@ -25,6 +20,11 @@ class SceneObject {
                 options.properties.translation[2] || 0
             ]
         };
+        this._gl = gl;
+        this._shaderProgram = createProgramFromShaders(this._gl, options.shaders.vertexShader, options.shaders.fragmentShader);
+        this._attributes = options.attributes;
+        this._uniforms = options.uniforms;
+        this._buffers = options.buffers;
         this.init();
     }
     init() {
@@ -57,7 +57,7 @@ class SceneObject {
     setBuffers() { }
     // Every render
     drawCall() {
-        this._gl.drawArrays(this._gl.TRIANGLES, 0, this._buffers['position_buffer'].location.getLength());
+        this._gl.drawArrays(this._gl.TRIANGLES, 0, this._buffers['position_buffer'].location.getLength() / 3);
     }
     calcAnimation() { }
     // Every render

@@ -1,3 +1,8 @@
+/**
+ * Math library
+ * Uses matrix row-convention
+ * Uses vector row-convention
+ */
 export function degToRad(angDeg) {
     return angDeg / 180 * Math.PI;
 }
@@ -143,6 +148,105 @@ export class Vec4 {
         return new Vec4(this.x, this.y, this.z);
     }
 }
+// export class Mat4Mutable {
+//     els: Array<number>;
+//
+//     constructor(
+//         e11: number, e12: number, e13: number, e14: number,
+//         e21: number, e22: number, e23: number, e24: number,
+//         e31: number, e32: number, e33: number, e34: number,
+//         e41: number, e42: number, e43: number, e44: number
+//     ) {
+//         this.els = [
+//             e11, e12, e13, e14,
+//             e21, e22, e23, e24,
+//             e31, e32, e33, e34,
+//             e41, e42, e43, e44
+//         ];
+//     }
+//
+//     static getScaleMat (sx: number, sy: number, sz: number) {
+//         return new Mat4Mutable(
+//             sx, 0, 0, 0,
+//             0, sy, 0, 0,
+//             0, 0, sz, 0,
+//             0, 0, 0, 1
+//         );
+//     }
+//
+//     static getRotMatX (angDeg: number) {
+//         const angRad = degToRad(angDeg);
+//         return new Mat4Mutable(
+//             1, 0, 0, 0,
+//             0, Math.cos(angRad), Math.sin(angRad), 0,
+//             0, -Math.sin(angRad), Math.cos(angRad), 0,
+//             0, 0, 0, 1
+//         );
+//     }
+//
+//     static getRotMatY (angDeg: number) {
+//         const angRad = degToRad(angDeg);
+//         return new Mat4Mutable(
+//             Math.cos(angRad), 0, -Math.sin(angRad), 0,
+//             0, 1, 0, 0,
+//             Math.sin(angRad), 0, Math.cos(angRad), 0,
+//             0, 0, 0, 1
+//         );
+//     }
+//
+//     static getRotMatZ (angDeg: number) {
+//         const angRad = degToRad(angDeg);
+//         return new Mat4Mutable(
+//             Math.cos(angRad), Math.sin(angRad), 0, 0,
+//             -Math.sin(angRad), Math.cos(angRad), 0, 0,
+//             0, 0, 1, 0,
+//             0, 0, 0, 1
+//         );
+//     }
+//
+//     static getTransMat (dx: number, dy: number, dz: number) {
+//         return new Mat4Mutable(
+//             1, 0, 0, 0,
+//             0, 1, 0, 0,
+//             0, 0, 1, 0,
+//             dx, dy, dz, 1
+//         );
+//     }
+//
+//     static getIdentMat () {
+//         return new Mat4Mutable(
+//             1, 0, 0, 0,
+//             0, 1, 0, 0,
+//             0, 0, 1, 0,
+//             0, 0, 0, 1
+//         );
+//     }
+//
+//     // // Multiply on mat from right
+//     // multiplyMatrix (mat: Mat4) {
+//     //     return new Mat4(
+//     //         this.e11 * mat.e11 + this.e12 * mat.e21 + this.e13 * mat.e31 + this.e14 * mat.e41,
+//     //         this.e11 * mat.e12 + this.e12 * mat.e22 + this.e13 * mat.e32 + this.e14 * mat.e42,
+//     //         this.e11 * mat.e13 + this.e12 * mat.e23 + this.e13 * mat.e33 + this.e14 * mat.e43,
+//     //         this.e11 * mat.e14 + this.e12 * mat.e24 + this.e13 * mat.e34 + this.e14 * mat.e44,
+//     //
+//     //         this.e21 * mat.e11 + this.e22 * mat.e21 + this.e23 * mat.e31 + this.e24 * mat.e41,
+//     //         this.e21 * mat.e12 + this.e22 * mat.e22 + this.e23 * mat.e32 + this.e24 * mat.e42,
+//     //         this.e21 * mat.e13 + this.e22 * mat.e23 + this.e23 * mat.e33 + this.e24 * mat.e43,
+//     //         this.e21 * mat.e14 + this.e22 * mat.e24 + this.e23 * mat.e34 + this.e24 * mat.e44,
+//     //
+//     //         this.e31 * mat.e11 + this.e32 * mat.e21 + this.e33 * mat.e31 + this.e34 * mat.e41,
+//     //         this.e31 * mat.e12 + this.e32 * mat.e22 + this.e33 * mat.e32 + this.e34 * mat.e42,
+//     //         this.e31 * mat.e13 + this.e32 * mat.e23 + this.e33 * mat.e33 + this.e34 * mat.e43,
+//     //         this.e31 * mat.e14 + this.e32 * mat.e24 + this.e33 * mat.e34 + this.e34 * mat.e44,
+//     //
+//     //         this.e41 * mat.e11 + this.e42 * mat.e21 + this.e43 * mat.e31 + this.e44 * mat.e41,
+//     //         this.e41 * mat.e12 + this.e42 * mat.e22 + this.e43 * mat.e32 + this.e44 * mat.e42,
+//     //         this.e41 * mat.e13 + this.e42 * mat.e23 + this.e43 * mat.e33 + this.e44 * mat.e43,
+//     //         this.e41 * mat.e14 + this.e42 * mat.e24 + this.e43 * mat.e34 + this.e44 * mat.e44,
+//     //     );
+//     // }
+// }
 export class Mat4 {
     constructor(e11, e12, e13, e14, e21, e22, e23, e24, e31, e32, e33, e34, e41, e42, e43, e44) {
         this.e11 = e11;
@@ -184,12 +288,14 @@ export class Mat4 {
         return new Mat4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, dx, dy, dz, 1);
     }
     // Scale + Translation
+    // @todo Check it
     static getOrthoMat(left, top, right, bottom, near, far) {
         return new Mat4(2 / (right - left), 0, 0, 0, 0, 2 / (top - bottom), 0, 0, 0, 0, -2 / (far - near), 0, -(right + left) / (right - left), -(top + bottom) / (top - bottom), -(far + near) / (far - near), 1);
     }
     static getWFactorMat(perspectiveFactor) {
         return new Mat4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, perspectiveFactor, 0, 0, 0, 1);
     }
+    // @todo Check it
     static getPerspMat(FOVRad, aspect, near, far) {
         const f = Math.tan(Math.PI / 2 - FOVRad / 2);
         return new Mat4(f / aspect, 0, 0, 0, 0, f, 0, 0, 0, 0, (far + near) / (near - far), 2 * far * near / (near - far), 0, 0, -1, 0);
@@ -197,14 +303,16 @@ export class Mat4 {
     static getIdentMat() {
         return new Mat4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
     }
-    // Multiply on mat from right
+    // Multiply on matrix from the right
     multiplyMatrix(mat) {
         return new Mat4(this.e11 * mat.e11 + this.e12 * mat.e21 + this.e13 * mat.e31 + this.e14 * mat.e41, this.e11 * mat.e12 + this.e12 * mat.e22 + this.e13 * mat.e32 + this.e14 * mat.e42, this.e11 * mat.e13 + this.e12 * mat.e23 + this.e13 * mat.e33 + this.e14 * mat.e43, this.e11 * mat.e14 + this.e12 * mat.e24 + this.e13 * mat.e34 + this.e14 * mat.e44, this.e21 * mat.e11 + this.e22 * mat.e21 + this.e23 * mat.e31 + this.e24 * mat.e41, this.e21 * mat.e12 + this.e22 * mat.e22 + this.e23 * mat.e32 + this.e24 * mat.e42, this.e21 * mat.e13 + this.e22 * mat.e23 + this.e23 * mat.e33 + this.e24 * mat.e43, this.e21 * mat.e14 + this.e22 * mat.e24 + this.e23 * mat.e34 + this.e24 * mat.e44, this.e31 * mat.e11 + this.e32 * mat.e21 + this.e33 * mat.e31 + this.e34 * mat.e41, this.e31 * mat.e12 + this.e32 * mat.e22 + this.e33 * mat.e32 + this.e34 * mat.e42, this.e31 * mat.e13 + this.e32 * mat.e23 + this.e33 * mat.e33 + this.e34 * mat.e43, this.e31 * mat.e14 + this.e32 * mat.e24 + this.e33 * mat.e34 + this.e34 * mat.e44, this.e41 * mat.e11 + this.e42 * mat.e21 + this.e43 * mat.e31 + this.e44 * mat.e41, this.e41 * mat.e12 + this.e42 * mat.e22 + this.e43 * mat.e32 + this.e44 * mat.e42, this.e41 * mat.e13 + this.e42 * mat.e23 + this.e43 * mat.e33 + this.e44 * mat.e43, this.e41 * mat.e14 + this.e42 * mat.e24 + this.e43 * mat.e34 + this.e44 * mat.e44);
     }
-    // Multiply on mat from left
+    // Multiply on matrix from the left
     premultiplyMatrix(mat) {
         return new Mat4(mat.e11 * this.e11 + mat.e12 * this.e21 + mat.e13 * this.e31 + mat.e14 * this.e41, mat.e11 * this.e12 + mat.e12 * this.e22 + mat.e13 * this.e32 + mat.e14 * this.e42, mat.e11 * this.e13 + mat.e12 * this.e23 + mat.e13 * this.e33 + mat.e14 * this.e43, mat.e11 * this.e14 + mat.e12 * this.e24 + mat.e13 * this.e34 + mat.e14 * this.e44, mat.e21 * this.e11 + mat.e22 * this.e21 + mat.e23 * this.e31 + mat.e24 * this.e41, mat.e21 * this.e12 + mat.e22 * this.e22 + mat.e23 * this.e32 + mat.e24 * this.e42, mat.e21 * this.e13 + mat.e22 * this.e23 + mat.e23 * this.e33 + mat.e24 * this.e43, mat.e21 * this.e14 + mat.e22 * this.e24 + mat.e23 * this.e34 + mat.e24 * this.e44, mat.e31 * this.e11 + mat.e32 * this.e21 + mat.e33 * this.e31 + mat.e34 * this.e41, mat.e31 * this.e12 + mat.e32 * this.e22 + mat.e33 * this.e32 + mat.e34 * this.e42, mat.e31 * this.e13 + mat.e32 * this.e23 + mat.e33 * this.e33 + mat.e34 * this.e43, mat.e31 * this.e14 + mat.e32 * this.e24 + mat.e33 * this.e34 + mat.e34 * this.e44, mat.e41 * this.e11 + mat.e42 * this.e21 + mat.e43 * this.e31 + mat.e44 * this.e41, mat.e41 * this.e12 + mat.e42 * this.e22 + mat.e43 * this.e32 + mat.e44 * this.e42, mat.e41 * this.e13 + mat.e42 * this.e23 + mat.e43 * this.e33 + mat.e44 * this.e43, mat.e41 * this.e14 + mat.e42 * this.e24 + mat.e43 * this.e34 + mat.e44 * this.e44);
     }
+    det() { }
+    inverse() { }
     toTypedArray() {
         return new Float32Array([
             this.e11, this.e12, this.e13, this.e14,
@@ -213,8 +321,6 @@ export class Mat4 {
             this.e41, this.e42, this.e43, this.e44
         ]);
     }
-    det() { }
-    inverse() { }
 }
 // Vec2 Tests
 // const v1 = new Vec2(10, 10);

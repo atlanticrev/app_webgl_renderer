@@ -42,10 +42,10 @@ class FLetter extends SceneObject {
             .toTypedArray();
     }
     calcAnimation() {
-        const step = 0.25;
-        this.properties.rotation[0] += step / 2;
+        const step = 0.5;
+        this.properties.rotation[0] += step / 5;
         this.properties.rotation[1] += step;
-        this.properties.rotation[2] += step / 4;
+        this.properties.rotation[2] += step / 5;
     }
 }
 export default FLetter;
