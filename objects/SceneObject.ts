@@ -62,21 +62,19 @@ class SceneObject {
 
     // Every render
     setUniforms () {
-        this._gl.uniformMatrix4fv(this._uniforms['u_position'].location, false, this.calcSRTMatrix());
+        this._gl.uniformMatrix4fv(this._uniforms['u_position'].location, false, this.setSRTMatrix());
     }
 
     // Every render
     setBuffers () {}
 
     // Every render
-    drawCall () {
-        this._gl.drawArrays(this._gl.TRIANGLES, 0, this._buffers['position_buffer'].location.getLength() / 3);
-    }
+    drawCall () {}
 
     calcAnimation () {}
 
     // Every render
-    calcSRTMatrix () {
+    setSRTMatrix () {
         return Mat4.getIdentMat().toTypedArray();
     }
 

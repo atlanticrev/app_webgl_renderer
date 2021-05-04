@@ -21,7 +21,7 @@ class Square extends SceneObject {
     }
 
     // Every render
-    calcSRTMatrix () {
+    setSRTMatrix () {
         return Mat4.getIdentMat()
             // Change transform origin
             .multiplyMatrix(

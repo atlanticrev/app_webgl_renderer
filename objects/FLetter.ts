@@ -31,7 +31,7 @@ class FLetter extends SceneObject {
     }
 
     // Every render
-    calcSRTMatrix () {
+    setSRTMatrix () {
         return Mat4.getIdentMat()
             // Change transform origin
             .multiplyMatrix(
@@ -77,11 +77,16 @@ class FLetter extends SceneObject {
             .toTypedArray();
     }
 
+    // Every render
     calcAnimation () {
         const step = 0.5;
         this.properties.rotation[0] += step / 5;
         this.properties.rotation[1] += step;
         this.properties.rotation[2] += step / 5;
+    }
+
+    drawCall () {
+        this._gl.drawArrays(this._gl.TRIANGLES, 0, this._buffers['position_buffer'].location.getLength() / 3);
     }
 }
 
